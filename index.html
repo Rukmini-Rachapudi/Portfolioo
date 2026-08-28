@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rukmini Rachapudi — Data Engineer &amp; Salesforce Developer</title>
+<meta name="description" content="Portfolio of Rachapudi Venkata Sai Rukmini — Data Engineer and Certified Salesforce Developer building flight-safety data pipelines, ETL systems, and enterprise Salesforce applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1D33;
+    --ink-soft:#2C3D59;
+    --ink-faint:#5C6B84;
+    --paper:#EDF0F4;
+    --paper-lift:#F8FAFC;
+    --rule:#C9D2DE;
+    --amber:#B57C09;
+    --amber-lit:#EBAB2E;
+    --teal:#15706B;
+    --teal-lit:#3FB2A6;
+
+    --display:"Bricolage Grotesque", "Public Sans", system-ui, sans-serif;
+    --body:"Public Sans", system-ui, -apple-system, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+    --gutter:clamp(20px, 5vw, 72px);
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--amber-lit);color:var(--ink);}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);}
+
+  /* ---------- shared type ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:0 0 30px;
+  }
+  .eyebrow::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--rule);
+  }
+  .h2{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(30px, 4.4vw, 46px);
+    line-height:1.04;
+    letter-spacing:-.022em;
+    margin:0 0 18px;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(15,29,51,.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .topbar-inner{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    height:56px;
+  }
+  .callsign{
+    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.14em;
+    color:var(--amber-lit);text-decoration:none;text-transform:uppercase;
+  }
+  .navlinks{display:flex;gap:22px;}
+  .navlinks a{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+    color:#B9C6DA;text-decoration:none;transition:color .18s ease;
+  }
+  .navlinks a:hover{color:#fff;}
+  @media (max-width:720px){ .navlinks{display:none;} }
+
+  /* ---------- hero: instrument panel ---------- */
+  .hero{
+    background:var(--ink);
+    color:#EAF0F8;
+    padding:clamp(44px,7vw,84px) 0 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size:46px 46px;
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), transparent 78%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1;}
+
+  .hero-tag{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--teal-lit);margin:0 0 22px;
+  }
+  .hero-name{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(42px, 8.2vw, 96px);
+    line-height:.94;
+    letter-spacing:-.035em;
+    margin:0;
+    color:#fff;
+  }
+  .hero-name span{display:block;}
+  .hero-name .second{color:#9FB2CC;}
+  .hero-role{
+    font-family:var(--mono);
+    font-size:clamp(12px,1.5vw,14.5px);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--amber-lit);
+    margin:26px 0 0;
+  }
+  .hero-blurb{
+    max-width:60ch;
+    color:#C3D0E2;
+    font-size:clamp(16px,1.8vw,18.5px);
+    margin:24px 0 0;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 0;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;
+    padding:12px 20px;text-decoration:none;border-radius:2px;
+    transition:transform .16s ease, background .16s ease, color .16s ease;
+  }
+  .btn-solid{background:var(--amber-lit);color:var(--ink);font-weight:600;}
+  .btn-solid:hover{transform:translateY(-2px);background:#FFC152;}
+  .btn-ghost{border:1px solid rgba(255,255,255,.28);color:#DCE6F3;}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--teal-lit);color:#fff;}
+
+  /* flight profile signature */
+  .profile{margin:clamp(38px,6vw,64px) 0 0;padding-bottom:clamp(24px,4vw,40px);}
+  .profile-label{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:#6D80A0;margin:0 0 10px;
+  }
+  .profile svg{width:100%;height:auto;display:block;}
+  .trace{
+    fill:none;stroke:var(--amber-lit);stroke-width:2.5;
+    stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:2000;stroke-dashoffset:2000;
+    animation:draw 2.4s cubic-bezier(.6,.05,.25,1) .25s forwards;
+  }
+  .trace-ghost{fill:none;stroke:rgba(235,171,46,.16);stroke-width:2.5;}
+  .gridline{stroke:rgba(255,255,255,.09);stroke-width:1;}
+  .gridtext{font-family:var(--mono);font-size:11px;fill:#5D6F8C;letter-spacing:.08em;}
+  .mark{opacity:0;animation:pop .5s ease forwards;}
+  .mark circle{fill:var(--ink);stroke:var(--teal-lit);stroke-width:2.5;}
+  .mark .yr{font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--teal-lit);letter-spacing:.06em;}
+  .mark .lbl{font-family:var(--mono);font-size:12.5px;fill:#AEBDD3;}
+  .m1{animation-delay:.85s;} .m2{animation-delay:1.3s;} .m3{animation-delay:1.75s;} .m4{animation-delay:2.2s;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes pop{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .profile-list{display:none;}
+  @media (max-width:760px){
+    .svg-labels{display:none;}
+    .profile-list{
+      display:grid;grid-template-columns:1fr;gap:0;margin-top:18px;
+      border-top:1px solid rgba(255,255,255,.12);
+    }
+    .profile-list div{
+      display:flex;gap:14px;padding:11px 0;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      font-family:var(--mono);font-size:12.5px;color:#AEBDD3;
+    }
+    .profile-list b{color:var(--teal-lit);font-weight:600;min-width:44px;}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(56px,8vw,104px) 0;}
+  #about{background:var(--paper-lift);border-bottom:1px solid var(--rule);}
+
+  .about-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(28px,5vw,72px);align-items:start;}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{margin:0 0 18px;font-size:18px;color:var(--ink-soft);}
+  .about-text p:last-child{margin-bottom:0;}
+  .lede{font-size:20px !important;color:var(--ink) !important;font-weight:500;}
+
+  .stats{border-top:2px solid var(--ink);}
+  .stat{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 0;border-bottom:1px solid var(--rule);}
+  .stat dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin:0;}
+  .stat dd{margin:0;font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.01em;text-align:right;}
+
+  /* experience */
+  .job{
+    display:grid;grid-template-columns:230px 1fr;gap:clamp(20px,4vw,56px);
+    padding:34px 0;border-top:1px solid var(--rule);
+  }
+  .job:last-of-type{border-bottom:1px solid var(--rule);}
+  @media (max-width:820px){ .job{grid-template-columns:1fr;gap:14px;} }
+  .job-when{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);}
+  .job-when .now{color:var(--teal);font-weight:600;}
+  .job-title{font-family:var(--display);font-weight:700;font-size:clamp(21px,2.6vw,27px);letter-spacing:-.016em;margin:0 0 4px;}
+  .job-org{font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);margin:0 0 18px;}
+  .job ul{margin:0;padding-left:0;list-style:none;}
+  .job li{position:relative;padding-left:22px;margin-bottom:11px;color:var(--ink-soft);}
+  .job li::before{
+    content:"";position:absolute;left:0;top:11px;width:9px;height:1.5px;background:var(--teal);
+  }
+  .job li:last-child{margin-bottom:0;}
+  .job li b{color:var(--ink);font-weight:600;}
+
+  /* projects */
+  #work{background:var(--paper-lift);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;}
+  .card{
+    background:#fff;border:1px solid var(--rule);border-radius:3px;
+    padding:26px 24px 22px;display:flex;flex-direction:column;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:0 14px 34px -18px rgba(15,29,51,.42);}
+  .card-kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--teal);margin:0 0 12px;}
+  .card h3{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.15;letter-spacing:-.015em;margin:0 0 12px;}
+  .card p{margin:0 0 20px;font-size:16px;color:var(--ink-soft);flex:1;}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{
+    font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+    padding:4px 9px;border:1px solid var(--rule);border-radius:2px;color:var(--ink-faint);background:var(--paper);
+  }
+
+  /* skills */
+  .skill-row{display:grid;grid-template-columns:210px 1fr;gap:clamp(16px,3vw,44px);padding:22px 0;border-top:1px solid var(--rule);align-items:start;}
+  .skill-row:last-of-type{border-bottom:1px solid var(--rule);}
+  @media (max-width:720px){ .skill-row{grid-template-columns:1fr;gap:12px;} }
+  .skill-row h3{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);margin:2px 0 0;font-weight:600;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{font-family:var(--mono);font-size:12.5px;padding:5px 11px;background:#fff;border:1px solid var(--rule);border-radius:2px;color:var(--ink-soft);}
+
+  /* certs + education */
+  #credentials{background:var(--ink);color:#E7EDF6;}
+  #credentials .eyebrow{color:#7E90AC;}
+  #credentials .eyebrow::after{background:rgba(255,255,255,.18);}
+  #credentials .h2{color:#fff;}
+  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);}
+  @media (max-width:860px){ .cred-grid{grid-template-columns:1fr;} }
+  .cred-sub{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-lit);margin:0 0 16px;}
+  .cred-list{list-style:none;margin:0;padding:0;}
+  .cred-list li{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:16.5px;color:#D3DEEC;}
+  .cred-list li:first-child{border-top:1px solid rgba(255,255,255,.14);}
+  .cred-list .meta{display:block;font-family:var(--mono);font-size:12px;color:#7E90AC;margin-top:3px;letter-spacing:.05em;}
+
+  /* contact */
+  #contact{background:var(--paper-lift);border-top:1px solid var(--rule);text-align:left;}
+  .contact-h{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(34px,6.4vw,68px);line-height:1;letter-spacing:-.03em;margin:0 0 28px;
+  }
+  .contact-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:2px solid var(--ink);}
+  .contact-list a, .contact-list span{
+    display:block;padding:20px 0;border-bottom:1px solid var(--rule);text-decoration:none;
+  }
+  .contact-list .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:6px;}
+  .contact-list .v{font-size:17px;font-weight:500;border-bottom:1.5px solid transparent;transition:border-color .18s ease;}
+  .contact-list a:hover .v{border-color:var(--amber);}
+  @media (min-width:640px){
+    .contact-list{gap:0 40px;}
+  }
+
+  footer{background:var(--ink);color:#7E90AC;padding:22px 0;}
+  .foot-inner{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;animation-delay:0ms !important;transition-duration:.001ms !important;}
+    .trace{stroke-dashoffset:0;}
+    .mark{opacity:1;}
+    .reveal{opacity:1;transform:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="callsign" href="#top">RVS Rukmini</a>
+    <nav class="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap hero-inner">
+    <p class="hero-tag">Carbondale, Illinois &nbsp;·&nbsp; Open to Data Engineering &amp; Full-Stack roles</p>
+    <h1 class="hero-name">
+      <span>Rukmini</span>
+      <span class="second">Rachapudi</span>
+    </h1>
+    <p class="hero-role">Data Engineer &nbsp;/&nbsp; Certified Salesforce Developer</p>
+    <p class="hero-blurb">
+      I build the pipelines that turn raw machine output into something people can act on — right now,
+      terabytes of aircraft flight logs that become safety reports for the team flying the aircraft.
+      Four years of enterprise engineering behind it, from Apex triggers to PySpark.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="mailto:rukminirachapudi27@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/rukmini-rachapudi" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="#work">See the work</a>
+    </div>
+
+    <div class="profile">
+      <p class="profile-label">Career profile · 2021 → 2026</p>
+      <svg viewBox="0 0 1200 300" role="img" aria-label="Career timeline drawn as a flight profile: joined Accenture in 2021, early promotion in 2022, moved to SIU Airport aviation analytics in 2025, Master's completing December 2026.">
+        <line class="gridline" x1="0" y1="285" x2="1200" y2="285"/>
+        <line class="gridline" x1="0" y1="205" x2="1200" y2="205"/>
+        <line class="gridline" x1="0" y1="125" x2="1200" y2="125"/>
+        <line class="gridline" x1="0" y1="45"  x2="1200" y2="45"/>
+        <g class="svg-labels">
+          <text class="gridtext" x="0" y="40">SCOPE</text>
+          <text class="gridtext" x="0" y="200">GROWTH</text>
+        </g>
+
+        <path class="trace-ghost" d="M 0 272 L 110 270 C 190 268, 230 214, 292 168 C 334 136, 378 126, 452 122 L 612 116 C 690 113, 730 106, 812 100 L 968 94 C 1052 90, 1120 68, 1200 46"/>
+        <path class="trace"       d="M 0 272 L 110 270 C 190 268, 230 214, 292 168 C 334 136, 378 126, 452 122 L 612 116 C 690 113, 730 106, 812 100 L 968 94 C 1052 90, 1120 68, 1200 46"/>
+
+        <g class="mark m1">
+          <circle cx="110" cy="270" r="6"/>
+          <g class="svg-labels">
+            <text class="yr"  x="110" y="248" text-anchor="middle">2021</text>
+            <text class="lbl" x="110" y="230" text-anchor="middle">Accenture</text>
+          </g>
+        </g>
+        <g class="mark m2">
+          <circle cx="292" cy="168" r="6"/>
+          <g class="svg-labels">
+            <text class="yr"  x="292" y="146" text-anchor="middle">2022</text>
+            <text class="lbl" x="292" y="128" text-anchor="middle">Early promotion</text>
+          </g>
+        </g>
+        <g class="mark m3">
+          <circle cx="612" cy="116" r="6"/>
+          <g class="svg-labels">
+            <text class="yr"  x="612" y="94" text-anchor="middle">2025</text>
+            <text class="lbl" x="612" y="76" text-anchor="middle">SIU Airport · flight data</text>
+          </g>
+        </g>
+        <g class="mark m4">
+          <circle cx="1130" cy="61" r="6"/>
+          <g class="svg-labels">
+            <text class="yr"  x="1130" y="176" text-anchor="middle">2026</text>
+            <text class="lbl" x="1130" y="158" text-anchor="middle">MS CS · December</text>
+          </g>
+        </g>
+      </svg>
+      <div class="profile-list">
+        <div><b>2021</b> Joined Accenture</div>
+        <div><b>2022</b> Early promotion, Travelers project</div>
+        <div><b>2025</b> SIU Airport — flight data engineering</div>
+        <div><b>2026</b> MS Computer Science, December</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <p class="eyebrow reveal">About</p>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="h2">Messy sensor data in.<br>Decisions out.</h2>
+        <p class="lede">Most of my work sits at the point where raw data is still unusable and somebody needs an answer from it anyway.</p>
+        <p>At SIU Airport I work with aircraft flight logs — thousands of parameters sampled every second across every flight. I built the PySpark pipeline that ingests and cleans that data, the rule-based logic that flags skids, near-misses, hard landings and taxi-speed violations, and the BigQuery datasets feeding the Power BI dashboards the safety team actually reads.</p>
+        <p>Before that, four years at Accenture on the Travelers account, where I was the person on the other end of a P1 at 3am. That job taught me the part of engineering that doesn't show up in a repo: how to keep a system standing while you fix it, and how to explain what happened to someone who doesn't want a stack trace.</p>
+        <p>I'm finishing a Master's in Computer Science at Southern Illinois University Carbondale, and I'm currently going deeper on Java and Spring Boot full-stack work alongside the data side.</p>
+      </div>
+      <dl class="stats reveal">
+        <div class="stat"><dt>Experience</dt><dd>4+ years</dd></div>
+        <div class="stat"><dt>Production issues resolved</dt><dd>5,000+</dd></div>
+        <div class="stat"><dt>P1 incidents · SLA misses</dt><dd>40% · zero</dd></div>
+        <div class="stat"><dt>Apex code coverage</dt><dd>95%+</dd></div>
+        <div class="stat"><dt>Deployment time cut</dt><dd>50%</dd></div>
+        <div class="stat"><dt>Graduate CGPA</dt><dd>4.0 / 4.0</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <p class="eyebrow reveal">Experience</p>
+    <h2 class="h2 reveal">Where I've done the work</h2>
+
+    <article class="job reveal">
+      <div class="job-when">Jan 2025 — <span class="now">Present</span><br>Carbondale, IL</div>
+      <div>
+        <h3 class="job-title">Data Engineer</h3>
+        <p class="job-org">SIU Airport · Aviation &amp; Data Analytics</p>
+        <ul>
+          <li>Built a scalable <b>PySpark ETL pipeline</b> that ingests, transforms and aggregates aircraft flight log data for safety reporting — cut monthly report generation time by <b>25%</b>.</li>
+          <li>Designed modular processing frameworks handling validation, cleansing, transformation and event-level structuring of flight parameters, so downstream analysis starts from clean data.</li>
+          <li>Wrote rule-based safety analytics in Python detecting <b>skids, near-miss incidents, hard landings, taxi-speed violations and CHT exceedances</b>.</li>
+          <li>Engineered monthly KPI workflows computing flight hours, event frequency and per-aircraft safety metrics using SQL transformations over PySpark output.</li>
+          <li>Delivered analytics-ready <b>BigQuery</b> datasets wired into <b>Power BI</b> dashboards for live operational monitoring and safety trend analysis.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job reveal">
+      <div class="job-when">Jun 2021 — Jan 2025<br>India</div>
+      <div>
+        <h3 class="job-title">Software Development Analyst</h3>
+        <p class="job-org">Accenture Solutions Pvt Ltd · Client: Travelers</p>
+        <ul>
+          <li>Held <b>99.5% system uptime</b> for a premium American insurance client through proactive monitoring and fast incident response.</li>
+          <li>Resolved <b>5,000+ production issues</b>, 40% of them P1, with <b>zero SLA misses</b>.</li>
+          <li>Developed custom <b>Apex classes, triggers, test classes and async processes</b> at 95%+ code coverage.</li>
+          <li>Built <b>Lightning Web Components</b> using pub-sub patterns and Lightning Data Service, and integrated Visualforce pages with Aura components.</li>
+          <li>Automated business processes with Salesforce Flows (screen and record-triggered) and approval processes — <b>15% faster</b> processes, <b>40% less</b> manual work.</li>
+          <li>Configured Service Cloud — assignment and escalation rules, entitlement processes, Omni-Channel — improving response times by <b>30%</b>.</li>
+          <li>Implemented <b>CI/CD</b> with Copado, Jenkins and GitLab, halving deployment time and reducing production errors through automated validation.</li>
+          <li>Built REST/OAuth integrations connecting Salesforce with surrounding enterprise systems.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <p class="eyebrow reveal">Selected work</p>
+    <h2 class="h2 reveal">Projects</h2>
+    <div class="cards">
+      <article class="card reveal">
+        <p class="card-kind">Data engineering · Ongoing</p>
+        <h3>Aviation flight data platform</h3>
+        <p>End-to-end pipeline for aviation safety analytics over terabytes of flight logs. PySpark ETL, rule-based event detection for near-misses and hard landings, and BigQuery datasets feeding real-time Power BI monitoring.</p>
+        <div class="tags"><span class="tag">PySpark</span><span class="tag">Python</span><span class="tag">BigQuery</span><span class="tag">SQL</span><span class="tag">Power BI</span></div>
+      </article>
+
+      <article class="card reveal">
+        <p class="card-kind">Enterprise platform</p>
+        <h3>Salesforce delivery for Travelers</h3>
+        <p>Four years of Apex, LWC and Service Cloud work on a live insurance platform — automation that removed 40% of manual steps, plus the CI/CD pipeline that got it all shipped twice as fast.</p>
+        <div class="tags"><span class="tag">Apex</span><span class="tag">LWC</span><span class="tag">SOQL</span><span class="tag">Copado</span><span class="tag">Jenkins</span></div>
+      </article>
+
+      <article class="card reveal">
+        <p class="card-kind">IoT · Embedded</p>
+        <h3>Dual-axis solar tracker</h3>
+        <p>Arduino-driven solar tracker that repositions the panel across two axes for maximum incidence, with temperature, humidity and rain sensors reporting conditions to an LCD readout.</p>
+        <div class="tags"><span class="tag">Arduino</span><span class="tag">C++</span><span class="tag">Sensors</span></div>
+      </article>
+
+      <article class="card reveal">
+        <p class="card-kind">Embedded systems</p>
+        <h3>Networked traffic monitoring</h3>
+        <p>Embedded Linux traffic monitoring system served over an embedded web server, letting operators observe and control junctions remotely to ease congestion and prevent collisions.</p>
+        <div class="tags"><span class="tag">Embedded Linux</span><span class="tag">EWS</span><span class="tag">Networking</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <p class="eyebrow reveal">Toolkit</p>
+    <h2 class="h2 reveal">What I work with</h2>
+
+    <div class="skill-row reveal">
+      <h3>Languages</h3>
+      <div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">SQL</span><span class="chip">JavaScript</span><span class="chip">C++</span><span class="chip">C</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <h3>Data engineering</h3>
+      <div class="chips"><span class="chip">PySpark</span><span class="chip">Apache Spark</span><span class="chip">ETL pipelines</span><span class="chip">Data modeling</span><span class="chip">BigQuery</span><span class="chip">Snowflake</span><span class="chip">Azure Data Factory</span><span class="chip">Databricks</span><span class="chip">ADLS</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <h3>Cloud &amp; DevOps</h3>
+      <div class="chips"><span class="chip">Microsoft Azure</span><span class="chip">AWS</span><span class="chip">Google Cloud</span><span class="chip">Docker</span><span class="chip">Jenkins</span><span class="chip">GitLab CI/CD</span><span class="chip">Copado</span><span class="chip">Git</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <h3>Salesforce</h3>
+      <div class="chips"><span class="chip">Apex</span><span class="chip">Lightning Web Components</span><span class="chip">Visualforce</span><span class="chip">SOQL</span><span class="chip">Service Cloud</span><span class="chip">Administration</span><span class="chip">REST APIs</span><span class="chip">OAuth</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <h3>Web</h3>
+      <div class="chips"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Bootstrap</span><span class="chip">Django</span><span class="chip">REST APIs</span><span class="chip">XML</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <h3>Analytics &amp; BI</h3>
+      <div class="chips"><span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Einstein Analytics</span></div>
+    </div>
+    <div class="skill-row reveal">
+      <h3>Ways of working</h3>
+      <div class="chips"><span class="chip">Agile</span><span class="chip">Scrum</span><span class="chip">TDD</span><span class="chip">Data structures &amp; algorithms</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <p class="eyebrow reveal">Credentials</p>
+    <h2 class="h2 reveal">Certified, schooled, and occasionally applauded</h2>
+    <div class="cred-grid">
+      <div class="reveal">
+        <p class="cred-sub">Certifications</p>
+        <ul class="cred-list">
+          <li>Salesforce Certified Administrator</li>
+          <li>Salesforce Certified Platform Developer I</li>
+          <li>Google Cloud Certified — Associate Cloud Engineer</li>
+          <li>Copado Fundamentals I</li>
+          <li>Python for Data Science</li>
+        </ul>
+        <p class="cred-sub" style="margin-top:34px;">Recognition</p>
+        <ul class="cred-list">
+          <li>Early promotion for contributions to the Travelers project<span class="meta">May 2022</span></li>
+          <li>Emerging Employee of the Year<span class="meta">July 2022</span></li>
+          <li>Multiple client appreciation awards for rapid, inventive problem resolution</li>
+          <li>President, Classical Dancing Club<span class="meta">Undergraduate, 2019</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <p class="cred-sub">Education</p>
+        <ul class="cred-list">
+          <li>Master of Computer Science — CGPA 4.0/4.0
+            <span class="meta">Southern Illinois University Carbondale · 2025 – Dec 2026 (expected)</span></li>
+          <li>B.E. Electronics &amp; Communication Engineering — CGPA 3.85/4.0
+            <span class="meta">Sri Chandrasekharendra Saraswathi Viswa Mahavidyalaya · 2017 – 2021</span></li>
+          <li>Intermediate (MPC) — 96.7%
+            <span class="meta">Narayana Junior College · 2015 – 2017</span></li>
+          <li>Secondary School — CGPA 9.7/10
+            <span class="meta">Bhashyam School · 2014 – 2015</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="contact-h reveal">Let's talk about<br>your data problem.</h2>
+    <div class="contact-list reveal">
+      <a href="mailto:rukminirachapudi27@gmail.com">
+        <span class="k">Email</span><span class="v">rukminirachapudi27@gmail.com</span>
+      </a>
+      <a href="tel:+16182033992">
+        <span class="k">Phone</span><span class="v">+1 618 203 3992</span>
+      </a>
+      <a href="https://www.linkedin.com/in/rukmini-rachapudi" target="_blank" rel="noopener">
+        <span class="k">LinkedIn</span><span class="v">/in/rukmini-rachapudi</span>
+      </a>
+      <span>
+        <span class="k">Based in</span><span class="v">Carbondale, Illinois</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>Rachapudi Venkata Sai Rukmini</span>
+    <span>Data Engineer · Salesforce Developer</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 60 + 'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
