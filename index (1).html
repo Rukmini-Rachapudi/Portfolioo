@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rukmini Rachapudi — Full Stack Developer</title>
+<meta name="description" content="Rukmini Rachapudi — Full Stack Developer specialising in production RAG systems, agentic AI workflows, and cloud-native applications built with Java, Spring Boot, React, Next.js, and FastAPI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A1626;
+    --ink-2:#3B3450;
+    --ink-3:#6E6880;
+    --base:#F4F3F8;
+    --lift:#FFFFFF;
+    --rule:#DDD8E8;
+    --violet:#5B4BD6;
+    --violet-soft:#EDEAFC;
+    --magenta:#C2437A;
+
+    --serif:"Newsreader", Georgia, serif;
+    --sans:"Public Sans", system-ui, -apple-system, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+
+    --pad:clamp(20px, 5vw, 76px);
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--base);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--violet);color:#fff;}
+  :focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:2px;}
+  .shell{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);}
+
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:14px;margin:0 0 28px;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--rule);}
+  .sec-h{
+    font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.4vw,46px);
+    line-height:1.06;letter-spacing:-.018em;margin:0 0 20px;
+  }
+
+  .bar{position:sticky;top:0;z-index:60;background:rgba(244,243,248,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);}
+  .bar-in{display:flex;align-items:center;justify-content:space-between;height:58px;gap:20px;}
+  .sig{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+  .sig i{color:var(--violet);font-style:normal;}
+  .links{display:flex;gap:24px;}
+  .links a{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;transition:color .16s;}
+  .links a:hover{color:var(--violet);}
+  @media (max-width:800px){.links{display:none;}}
+
+  .hero{padding:clamp(48px,7vw,92px) 0 clamp(40px,6vw,72px);}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--magenta);margin:0 0 20px;}
+  .hero h1{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(44px,7.6vw,88px);line-height:.98;letter-spacing:-.032em;margin:0;
+  }
+  .hero h1 em{font-style:italic;color:var(--violet);}
+  .role{font-family:var(--mono);font-size:clamp(12px,1.5vw,14px);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 0;}
+
+  .answer{
+    margin:clamp(34px,5vw,52px) 0 0;background:var(--lift);
+    border:1px solid var(--rule);border-radius:4px;overflow:hidden;
+    box-shadow:0 20px 50px -34px rgba(26,22,38,.4);
+  }
+  .answer-top{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--rule);background:#FAF9FD;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--violet);flex:none;}
+  .answer-q{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.02em;}
+  .answer-body{padding:24px 20px 20px;}
+  .answer-body p{margin:0;font-size:clamp(16.5px,2vw,19px);color:var(--ink-2);min-height:5.6em;}
+  #typed{white-space:pre-wrap;}
+  .caret{display:inline-block;width:2px;height:1.05em;background:var(--violet);vertical-align:-2px;animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .cite{
+    font-family:var(--mono);font-size:11px;font-weight:600;color:var(--violet);
+    background:var(--violet-soft);border-radius:3px;padding:1px 5px;text-decoration:none;
+    vertical-align:1px;transition:background .16s,color .16s;
+  }
+  .cite:hover{background:var(--violet);color:#fff;}
+  .sources{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 20px;opacity:0;transition:opacity .5s ease;}
+  .sources.on{opacity:1;}
+  .src{
+    display:flex;align-items:baseline;gap:7px;font-family:var(--mono);font-size:11.5px;
+    color:var(--ink-3);border:1px solid var(--rule);border-radius:3px;padding:6px 10px;text-decoration:none;
+    transition:border-color .16s,color .16s;
+  }
+  .src:hover{border-color:var(--violet);color:var(--ink);}
+  .src b{color:var(--violet);font-weight:600;}
+
+  .cta{display:flex;flex-wrap:wrap;gap:11px;margin:30px 0 0;}
+  .btn{
+    display:inline-flex;align-items:center;font-family:var(--mono);font-size:12.5px;
+    letter-spacing:.08em;text-transform:uppercase;padding:13px 22px;border-radius:3px;
+    text-decoration:none;transition:transform .16s,background .16s,border-color .16s;
+  }
+  .btn-fill{background:var(--ink);color:#fff;font-weight:500;}
+  .btn-fill:hover{transform:translateY(-2px);background:var(--violet);}
+  .btn-line{border:1px solid var(--rule);color:var(--ink-2);background:var(--lift);}
+  .btn-line:hover{transform:translateY(-2px);border-color:var(--violet);color:var(--violet);}
+
+  section{padding:clamp(56px,8vw,100px) 0;}
+  #about{background:var(--lift);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+  .split{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(30px,5vw,70px);align-items:start;}
+  @media (max-width:880px){.split{grid-template-columns:1fr;}}
+  .prose p{margin:0 0 17px;color:var(--ink-2);font-size:17.5px;}
+  .prose p:last-child{margin-bottom:0;}
+  .prose .first{font-family:var(--serif);font-size:21px;line-height:1.45;color:var(--ink);}
+
+  .figs{border-top:2px solid var(--ink);}
+  .fig{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);}
+  .fig dt{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:0;}
+  .fig dd{margin:0;font-family:var(--serif);font-weight:600;font-size:22px;text-align:right;}
+
+  .post{display:grid;grid-template-columns:220px 1fr;gap:clamp(20px,4vw,54px);padding:34px 0;border-top:1px solid var(--rule);}
+  .post:last-of-type{border-bottom:1px solid var(--rule);}
+  @media (max-width:840px){.post{grid-template-columns:1fr;gap:14px;}}
+  .when{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);}
+  .when .live{color:var(--magenta);font-weight:600;}
+  .post h3{font-family:var(--serif);font-weight:600;font-size:clamp(22px,2.6vw,28px);letter-spacing:-.015em;margin:0 0 3px;}
+  .at{font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--violet);margin:0 0 18px;}
+  .post ul{margin:0;padding:0;list-style:none;}
+  .post li{position:relative;padding-left:21px;margin-bottom:12px;color:var(--ink-2);}
+  .post li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:1.5px;background:var(--magenta);}
+  .post li:last-child{margin-bottom:0;}
+  .post li b{color:var(--ink);font-weight:600;}
+
+  #work{background:var(--lift);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+  .item{
+    background:var(--base);border:1px solid var(--rule);border-radius:4px;padding:27px 25px 23px;
+    display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s;
+  }
+  .item:hover{transform:translateY(-4px);border-color:var(--violet);box-shadow:0 16px 36px -22px rgba(91,75,214,.5);}
+  .kind{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--magenta);margin:0 0 13px;}
+  .item h3{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.18;letter-spacing:-.012em;margin:0 0 12px;}
+  .item p{margin:0 0 20px;font-size:16px;color:var(--ink-2);flex:1;}
+  .stack{display:flex;flex-wrap:wrap;gap:6px;}
+  .stack span{font-family:var(--mono);font-size:11px;padding:4px 9px;border:1px solid var(--rule);border-radius:2px;color:var(--ink-3);background:var(--lift);}
+
+  .band{display:grid;grid-template-columns:230px 1fr;gap:clamp(16px,3vw,44px);padding:22px 0;border-top:1px solid var(--rule);align-items:start;}
+  .band:last-of-type{border-bottom:1px solid var(--rule);}
+  @media (max-width:760px){.band{grid-template-columns:1fr;gap:12px;}}
+  .band h3{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);margin:3px 0 0;}
+  .pills{display:flex;flex-wrap:wrap;gap:7px;}
+  .pill{font-family:var(--mono);font-size:12.5px;padding:5px 11px;background:var(--lift);border:1px solid var(--rule);border-radius:2px;color:var(--ink-2);}
+
+  #edu{background:var(--ink);color:#EDEAF5;}
+  #edu .eyebrow{color:#8A83A0;}
+  #edu .eyebrow::after{background:rgba(255,255,255,.17);}
+  #edu .sec-h{color:#fff;}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);}
+  @media (max-width:860px){.duo{grid-template-columns:1fr;}}
+  .sub{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C58BAA;margin:0 0 16px;}
+  .rows{list-style:none;margin:0;padding:0;}
+  .rows li{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:16.5px;color:#CFC9DD;}
+  .rows li:first-child{border-top:1px solid rgba(255,255,255,.14);}
+  .rows .note{display:block;font-family:var(--mono);font-size:12px;color:#8A83A0;margin-top:4px;letter-spacing:.04em;}
+
+  #say{background:var(--lift);border-top:1px solid var(--rule);}
+  .big{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6.2vw,66px);line-height:1.02;letter-spacing:-.028em;margin:0 0 30px;}
+  .big em{font-style:italic;color:var(--violet);}
+  .reach{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 40px;border-top:2px solid var(--ink);}
+  .reach a{display:block;padding:19px 0;border-bottom:1px solid var(--rule);text-decoration:none;}
+  .reach .k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;}
+  .reach .v{font-size:17px;font-weight:500;border-bottom:1.5px solid transparent;transition:border-color .16s;}
+  .reach a:hover .v{border-color:var(--violet);}
+
+  footer{display:block;background:var(--ink);color:#8A83A0;padding:22px 0;}
+  .fin{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;}
+
+  .rise{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .rise.up{opacity:1;transform:none;}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+    .rise{opacity:1;transform:none;}
+    .sources{opacity:1;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="shell bar-in">
+    <a class="sig" href="#top">Rukmini <i>Rachapudi</i></a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#edu">Education</a>
+      <a href="#say">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="shell">
+    <p class="kicker">Full Stack Development &nbsp;·&nbsp; Applied AI &nbsp;·&nbsp; Cloud-Native Systems</p>
+    <h1>Rukmini<br><em>Rachapudi</em></h1>
+    <p class="role">Full Stack Developer &nbsp;/&nbsp; RAG, Agentic AI &amp; Distributed Systems</p>
+
+    <div class="answer">
+      <div class="answer-top">
+        <span class="dot"></span>
+        <span class="answer-q">summarise this candidate</span>
+      </div>
+      <div class="answer-body">
+        <p><span id="typed"></span><span class="caret" id="caret"></span></p>
+      </div>
+      <div class="sources" id="sources">
+        <a class="src" href="#experience"><b>1</b> Databricks · Full Stack Developer</a>
+        <a class="src" href="#experience"><b>2</b> Accenture · Software Engineer</a>
+        <a class="src" href="#work"><b>3</b> Selected projects</a>
+        <a class="src" href="#edu"><b>4</b> MS Computer Science</a>
+      </div>
+    </div>
+
+    <div class="cta">
+      <a class="btn btn-fill" href="mailto:rukminirachapudi33@gmail.com">Get in touch</a>
+      <a class="btn btn-line" href="https://www.linkedin.com/in/rukmini-rachapudi" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-line" href="https://github.com/Rukmini-Rachapudi" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="shell">
+    <p class="eyebrow rise">About</p>
+    <div class="split">
+      <div class="prose rise">
+        <h2 class="sec-h">Building AI systems<br>that hold up in production.</h2>
+        <p class="first">Full Stack Developer with over five years of experience across enterprise application development, cloud-native architecture, and production Generative AI systems.</p>
+        <p>My current work centres on designing and operating retrieval-augmented generation platforms at scale: multi-tenant ingestion and embedding pipelines, hybrid retrieval with re-ranking, and agentic orchestration incorporating tool calling and human-in-the-loop approval. These systems are delivered through streaming React and Next.js interfaces backed by Python and FastAPI services.</p>
+        <p>A consistent focus throughout is measurable quality. Retrieval performance is evaluated continuously against faithfulness, context precision, recall, and relevancy, while model routing, fallback logic, and quality gates keep inference cost and latency predictable under production load.</p>
+        <p>This work builds on four and a half years at Accenture delivering Java, Spring Boot, and React services within cross-functional Agile teams — optimising REST APIs with Redis and Apache Kafka, expanding automated test coverage, and managing deployments across Azure, Docker, and Kubernetes.</p>
+        <p>I work closely with Product, Security, and Engineering, which in practice means retrieval and access decisions are made alongside authentication, RBAC, and PII-handling constraints rather than retrofitted afterwards. I am currently completing a Master of Computer Science at Southern Illinois University, graduating December 2026.</p>
+      </div>
+      <dl class="figs rise">
+        <div class="fig"><dt>Experience</dt><dd>5+ years</dd></div>
+        <div class="fig"><dt>Copilot users served</dt><dd>500+</dd></div>
+        <div class="fig"><dt>Documents indexed</dt><dd>10K+</dd></div>
+        <div class="fig"><dt>Query resolution gain</dt><dd>22%</dd></div>
+        <div class="fig"><dt>Inference cost reduction</dt><dd>24%</dd></div>
+        <div class="fig"><dt>Monitored availability</dt><dd>99.9%</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="shell">
+    <p class="eyebrow rise">Experience</p>
+    <h2 class="sec-h rise">Professional experience</h2>
+
+    <article class="post rise">
+      <div class="when">Jan 2026 — <span class="live">Present</span><br>USA</div>
+      <div>
+        <h3>Full Stack Developer</h3>
+        <p class="at">Databricks</p>
+        <ul>
+          <li>Engineer an <b>enterprise AI copilot</b> for fragmented organisational knowledge using Next.js, React, TypeScript, Python, FastAPI and LangChain, delivering SSE streaming, citations and multi-turn conversations to <b>500+ employees</b>.</li>
+          <li>Build multi-tenant <b>RAG pipelines across 10K+ documents</b> using ingestion, chunking, embeddings, metadata filtering, Pinecone, BM25, hybrid retrieval, Cohere re-ranking and RRF for secure, citation-backed knowledge access.</li>
+          <li>Orchestrate <b>agentic AI workflows</b> using LangGraph, tool calling, MCP, REST APIs and human-in-the-loop approvals, partnering with Product and Security to improve complex query resolution by <b>22%</b> during evaluations.</li>
+          <li>Optimise <b>LLM routing</b> across OpenAI, Anthropic Claude and Llama models using query classification, fallback logic and quality gates, reducing inference costs by <b>24%</b> across production workloads.</li>
+          <li>Evaluate RAG quality using <b>RAGAS and LangSmith</b>, measuring faithfulness, context precision, recall and relevancy to guide retrieval tuning and strengthen grounded responses.</li>
+          <li>Secure production AI services using Auth0 SSO/SAML, RBAC, PII redaction, OpenTelemetry, Datadog APM, CloudWatch, Terraform and AWS, maintaining <b>99.9% monitored availability</b>.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="post rise">
+      <div class="when">May 2020 — Dec 2024<br>India</div>
+      <div>
+        <h3>Software Engineer</h3>
+        <p class="at">Accenture</p>
+        <ul>
+          <li>Developed <b>4 customer operations modules</b> using Java, Spring Boot, Spring MVC, Spring Data JPA, React.js and React Router, translating Agile user stories into maintainable full stack features.</li>
+          <li>Optimised REST APIs using OpenAPI, JSON, PostgreSQL, Redis and Apache Kafka, resolving transaction bottlenecks through caching and asynchronous processing to reduce production response times by <b>15%</b>.</li>
+          <li>Strengthened release quality using JUnit, Mockito, Postman, Git, Jenkins and CI/CD, expanding regression coverage and improving deployment readiness across enterprise release cycles.</li>
+          <li>Automated <b>2,500+ monthly documents</b> using Python, FastAPI, React.js, TypeScript, Azure AI Document Intelligence, Azure Functions, Blob Storage and Service Bus.</li>
+          <li>Implemented confidence scoring, human-in-the-loop review, business rule validation, retry logic and PostgreSQL audit tracking, reducing manual review effort by <b>18%</b> while improving auditability.</li>
+          <li>Deployed services across development, QA and UAT using Azure, Docker, Kubernetes, AKS, Jenkins, Azure Monitor and Application Insights.</li>
+          <li>Integrated a <b>knowledge search pilot</b> using Azure OpenAI, LangChain, RAG, embeddings, Azure AI Search and Redis, reducing search time by <b>20%</b>.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="work">
+  <div class="shell">
+    <p class="eyebrow rise">Selected work</p>
+    <h2 class="sec-h rise">Projects</h2>
+    <div class="grid">
+      <article class="item rise">
+        <p class="kind">Java · Analytics</p>
+        <h3>Aviation flight safety monitoring &amp; analytics</h3>
+        <p>Flight safety monitoring system for Southern Illinois University Aviation's 21-aircraft fleet. Trigger-based logic detects skid, bank and pitch events, with pairwise analysis identifying near misses within a 500 ft 3D threshold. A monthly Excel report generator feeds Power BI dashboards built on star schema modelling and DAX.</p>
+        <div class="stack"><span>Java</span><span>SQL</span><span>SQLite</span><span>JDBC</span><span>Apache POI</span><span>Maven</span><span>Power BI</span></div>
+      </article>
+
+      <article class="item rise">
+        <p class="kind">Applied AI · Production</p>
+        <h3>Enterprise knowledge copilot</h3>
+        <p>Multi-tenant retrieval platform over 10K+ enterprise documents combining hybrid retrieval, Cohere re-ranking and reciprocal rank fusion, surfaced through a streaming Next.js interface with inline citations. An agentic layer handles tool calling and human approvals, while routing across three model families controls inference cost.</p>
+        <div class="stack"><span>LangChain</span><span>LangGraph</span><span>Pinecone</span><span>FastAPI</span><span>Next.js</span><span>RAGAS</span></div>
+      </article>
+
+      <article class="item rise">
+        <p class="kind">Automation · Azure</p>
+        <h3>Intelligent document processing pipeline</h3>
+        <p>Automated intake, validation and routing for 2,500+ documents per month using Azure AI Document Intelligence and Azure Functions. Confidence scoring escalates low-certainty extractions to human review, supported by retry logic, structured logging and PostgreSQL audit tracking.</p>
+        <div class="stack"><span>Python</span><span>FastAPI</span><span>Azure Functions</span><span>Blob Storage</span><span>PostgreSQL</span><span>TypeScript</span></div>
+      </article>
+
+      <article class="item rise">
+        <p class="kind">IoT · Embedded</p>
+        <h3>Dual-axis solar tracking system with weather sensing</h3>
+        <p>IoT-based dual-axis solar tracker using Arduino and servo motors to optimise panel positioning across two axes for maximum solar incidence. Environmental sensors for temperature, humidity and rainfall monitor operating conditions, with readings surfaced on an integrated LCD display.</p>
+        <div class="stack"><span>Arduino</span><span>IoT</span><span>C++</span><span>Servo Motors</span><span>Sensors</span></div>
+      </article>
+
+      <article class="item rise">
+        <p class="kind">Embedded · Networking</p>
+        <h3>Traffic monitoring via embedded web technology</h3>
+        <p>Embedded Linux traffic monitoring system designed to reduce congestion and prevent accidents. Junction data is exposed over an embedded web server, enabling operators to monitor and control signals remotely across a network.</p>
+        <div class="stack"><span>Embedded Linux</span><span>Embedded Web Servers</span><span>Networking</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="shell">
+    <p class="eyebrow rise">Toolkit</p>
+    <h2 class="sec-h rise">Technical skills</h2>
+
+    <div class="band rise">
+      <h3>Languages &amp; Frontend</h3>
+      <div class="pills"><span class="pill">Java</span><span class="pill">Python</span><span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">React.js</span><span class="pill">Next.js</span><span class="pill">React Router</span><span class="pill">HTML5</span><span class="pill">CSS3</span><span class="pill">SSE</span></div>
+    </div>
+    <div class="band rise">
+      <h3>AI &amp; Gen AI</h3>
+      <div class="pills"><span class="pill">Agentic AI</span><span class="pill">RAG</span><span class="pill">LLMs</span><span class="pill">LangChain</span><span class="pill">LangGraph</span><span class="pill">Pinecone</span><span class="pill">Embeddings</span><span class="pill">Hybrid Retrieval</span><span class="pill">Cohere Re-Ranking</span><span class="pill">MCP</span><span class="pill">Tool Calling</span><span class="pill">HITL</span><span class="pill">PyTorch</span><span class="pill">Hugging Face</span><span class="pill">PEFT</span><span class="pill">LoRA</span><span class="pill">QLoRA</span><span class="pill">SFT</span><span class="pill">DPO</span><span class="pill">RAGAS</span><span class="pill">LangSmith</span><span class="pill">vLLM</span><span class="pill">MLflow</span><span class="pill">Quantization</span></div>
+    </div>
+    <div class="band rise">
+      <h3>Backend &amp; APIs</h3>
+      <div class="pills"><span class="pill">Spring Boot</span><span class="pill">Spring MVC</span><span class="pill">Spring Data JPA</span><span class="pill">FastAPI</span><span class="pill">REST APIs</span><span class="pill">OpenAPI</span><span class="pill">JSON</span><span class="pill">Async Processing</span></div>
+    </div>
+    <div class="band rise">
+      <h3>Databases &amp; Data Stores</h3>
+      <div class="pills"><span class="pill">PostgreSQL</span><span class="pill">MySQL</span><span class="pill">Oracle</span><span class="pill">MongoDB</span><span class="pill">Redis</span><span class="pill">Amazon ElastiCache</span><span class="pill">ChromaDB</span></div>
+    </div>
+    <div class="band rise">
+      <h3>Cloud &amp; DevOps</h3>
+      <div class="pills"><span class="pill">AWS</span><span class="pill">EC2</span><span class="pill">RDS</span><span class="pill">S3</span><span class="pill">ECS</span><span class="pill">Lambda</span><span class="pill">CloudFront</span><span class="pill">Azure</span><span class="pill">Azure Functions</span><span class="pill">Blob Storage</span><span class="pill">Docker</span><span class="pill">Kubernetes</span><span class="pill">AKS</span><span class="pill">Terraform</span><span class="pill">Jenkins</span><span class="pill">GitHub Actions</span><span class="pill">CI/CD</span></div>
+    </div>
+    <div class="band rise">
+      <h3>Testing &amp; Quality</h3>
+      <div class="pills"><span class="pill">JUnit</span><span class="pill">Mockito</span><span class="pill">PyTest</span><span class="pill">Jest</span><span class="pill">Postman</span><span class="pill">API Testing</span><span class="pill">Integration Testing</span><span class="pill">Regression</span><span class="pill">UAT</span></div>
+    </div>
+    <div class="band rise">
+      <h3>Security &amp; Observability</h3>
+      <div class="pills"><span class="pill">Auth0</span><span class="pill">SSO/SAML</span><span class="pill">RBAC</span><span class="pill">PII Redaction</span><span class="pill">OpenTelemetry</span><span class="pill">Datadog APM</span><span class="pill">CloudWatch</span><span class="pill">Azure Monitor</span><span class="pill">Application Insights</span><span class="pill">Structured Logging</span></div>
+    </div>
+    <div class="band rise">
+      <h3>Architecture &amp; Practices</h3>
+      <div class="pills"><span class="pill">Microservices</span><span class="pill">Distributed Systems</span><span class="pill">Event-Driven Architecture</span><span class="pill">Apache Kafka</span><span class="pill">API Gateway</span><span class="pill">Caching</span><span class="pill">Agile</span><span class="pill">Scrum</span><span class="pill">Production Support</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="edu">
+  <div class="shell">
+    <p class="eyebrow rise">Credentials</p>
+    <h2 class="sec-h rise">Education &amp; certifications</h2>
+    <div class="duo">
+      <div class="rise">
+        <p class="sub">Education</p>
+        <ul class="rows">
+          <li>Master of Computer Science
+            <span class="note">Southern Illinois University · Jan 2025 – Dec 2026</span></li>
+        </ul>
+      </div>
+      <div class="rise">
+        <p class="sub">Certifications</p>
+        <ul class="rows">
+          <li>Google Cloud Certified — Associate Cloud Engineer</li>
+          <li>Salesforce Certified Platform Developer I</li>
+          <li>IBM — Python for Data Science</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="say">
+  <div class="shell">
+    <p class="eyebrow rise">Contact</p>
+    <h2 class="big rise">Open to full stack<br>and <em>applied AI</em> roles.</h2>
+    <div class="reach rise">
+      <a href="mailto:rukminirachapudi33@gmail.com"><span class="k">Email</span><span class="v">rukminirachapudi33@gmail.com</span></a>
+      <a href="tel:+16182033992"><span class="k">Phone</span><span class="v">+1 (618) 203-3992</span></a>
+      <a href="https://www.linkedin.com/in/rukmini-rachapudi" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">/in/rukmini-rachapudi</span></a>
+      <a href="https://github.com/Rukmini-Rachapudi" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="v">Rukmini-Rachapudi</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell fin">
+    <span>Rukmini Rachapudi</span>
+    <span>Full Stack Developer · Applied AI</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var target = document.getElementById('typed');
+  var caret  = document.getElementById('caret');
+  var srcBox = document.getElementById('sources');
+
+  var parts = [
+    {t:"Full Stack Developer with 5+ years across enterprise application development, cloud-native architecture and production Generative AI. Currently engineering multi-tenant RAG and agentic systems at Databricks "},
+    {c:"1"},
+    {t:", following four and a half years delivering Java, Spring Boot and React services at Accenture "},
+    {c:"2"},
+    {t:". Project work spans aviation safety analytics, IoT and embedded systems "},
+    {c:"3"},
+    {t:". Completing an MS in Computer Science in December 2026 "},
+    {c:"4"},
+    {t:"."}
+  ];
+
+  function citeHTML(n){
+    var href = n === "3" ? "#work" : (n === "4" ? "#edu" : "#experience");
+    return '<a class="cite" href="' + href + '">' + n + '</a>';
+  }
+
+  function finish(){
+    var html = "";
+    parts.forEach(function(p){ html += p.c ? citeHTML(p.c) : p.t; });
+    target.innerHTML = html;
+    caret.style.display = 'none';
+    srcBox.classList.add('on');
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
+
+  var pi = 0, ci = 0, html = "";
+  function step(){
+    if (pi >= parts.length){
+      caret.style.display = 'none';
+      srcBox.classList.add('on');
+      return;
+    }
+    var p = parts[pi];
+    if (p.c){
+      html += citeHTML(p.c);
+      target.innerHTML = html;
+      pi++; ci = 0;
+      setTimeout(step, 190);
+      return;
+    }
+    if (ci < p.t.length){
+      html += p.t.charAt(ci);
+      target.innerHTML = html;
+      ci++;
+      setTimeout(step, 15);
+    } else { pi++; ci = 0; setTimeout(step, 40); }
+  }
+  setTimeout(step, 500);
+})();
+
+var obs = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('up'); obs.unobserve(e.target); }
+  });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rise').forEach(function(el,i){
+  el.style.transitionDelay = (i % 4) * 60 + 'ms';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
